@@ -2,7 +2,6 @@
 
 # Môi trường & secrets 
 backend/.env
-backend/.env.example
 backend/venv/
 
 # Vector DB data (local only, sẽ rebuild khi chạy)
@@ -32,3 +31,5 @@ frontend/.vite/
 # ===== CHUNG =====
 .DS_Store
 *.log
+
+!.env.example
