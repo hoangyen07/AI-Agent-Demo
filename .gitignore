@@ -1,0 +1,32 @@
+# ===== BACKEND =====
+
+# Môi trường & secrets 
+backend/.env
+backend/venv/
+
+# Vector DB data (local only, sẽ rebuild khi chạy)
+backend/chroma_db/
+
+# Python cache
+backend/__pycache__/
+backend/app/**/__pycache__/
+backend/**/*.pyc
+backend/**/*.pyo
+
+# ===== FRONTEND =====
+
+# Dependencies (npm install sẽ tự tải lại)
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+
+# Env local
+frontend/.env
+
+# Vite cache
+frontend/.vite/
+
+# ===== CHUNG =====
+.DS_Store
+*.log
