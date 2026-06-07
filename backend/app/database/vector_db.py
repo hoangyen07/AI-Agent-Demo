@@ -155,3 +155,18 @@ def get_all_projects() -> list[str]:
         return sorted(ids)
     except Exception:
         return []
+
+def delete_file_chunks(project_id: str, filename: str):
+    """Xóa toàn bộ chunks của 1 file trong 1 project trước khi ingest version mới."""
+    try:
+        collection = _get_collection()
+        results = collection.get(
+            where={"$and": [{"project_id": project_id}, {"source_file": filename}]},
+            include=[]
+        )
+        ids_to_delete = results.get("ids", [])
+        if ids_to_delete:
+            collection.delete(ids=ids_to_delete)
+            print(f"[VectorDB] Deleted {len(ids_to_delete)} old chunks for {filename} in {project_id}")
+    except Exception as e:
+        print(f"[VectorDB] delete_file_chunks error: {e}")
