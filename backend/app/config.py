@@ -1,4 +1,4 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from functools import lru_cache
 
 
@@ -6,9 +6,8 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     chroma_persist_dir: str = "./chroma_db"
     allowed_origins: str = "http://localhost:5173,http://localhost:3000"
-
-    class Config:
-        env_file = ".env"
+    gemini_embedding_model: str = "gemini-embedding-001" 
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
     @property
     def origins_list(self) -> list[str]:

@@ -1,5 +1,4 @@
 import chromadb
-from chromadb.utils.embedding_functions import GoogleGenerativeAiEmbeddingFunction
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader, Docx2txtLoader
 from langchain_core.documents import Document
@@ -34,10 +33,10 @@ class ModernGoogleEmbeddingFunction(EmbeddingFunction):
         return [emb.values for emb in response.embeddings]
 
 def _get_ef():
-    # Sử dụng Class mới + model chuẩn hiện tại là "text-embedding-004"
+    # Sử dụng Class mới + model chuẩn hiện tại là "gemini-embedding-001"
     return ModernGoogleEmbeddingFunction(
         api_key=settings.gemini_api_key,
-        model_name="gemini-embedding-001" # Model embedding mới nhất, thay thế "models/embedding-001" cũ
+        model_name=settings.gemini_embedding_model # Model embedding mới nhất, thay thế "models/embedding-001" cũ
     )
 
 def _get_client():
