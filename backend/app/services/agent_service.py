@@ -87,7 +87,7 @@ async def stream_chat(
     )
 
     async for chunk in await client.aio.models.generate_content_stream(
-        model="gemini-2.5-flash",
+        model=settings.gemini_flash_model,
         contents=contents,
         config=config,
     ):
