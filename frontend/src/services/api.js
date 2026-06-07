@@ -19,7 +19,25 @@ export async function uploadDocument(projectId, projectName, file) {
 
   const data = await res.json()
   if (!res.ok) throw new Error(data.detail || 'Upload failed')
+  // Returns: { status, message, chunks_added, project_id, version, is_new_version }
   return data
+}
+
+export async function compareVersions(projectId, filename, versionA, versionB) {
+  const res = await fetch(`${BASE_URL}/api/v1/projects/${projectId}/compare`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ filename, version_a: versionA, version_b: versionB }),
+  })
+  const data = await res.json()
+  if (!res.ok) throw new Error(data.detail || 'Compare failed')
+  return data
+}
+
+export async function fetchVersionHistory(projectId) {
+  const res = await fetch(`${BASE_URL}/api/v1/projects/${projectId}/versions`)
+  if (!res.ok) throw new Error('Failed to fetch versions')
+  return res.json()
 }
 
 /**
